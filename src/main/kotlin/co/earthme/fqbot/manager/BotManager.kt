@@ -39,12 +39,14 @@ class BotManager {
                     BotConfigEntry(
                         114514,
                         "a",
-                        BotConfiguration.MiraiProtocol.ANDROID_PAD
+                        BotConfiguration.MiraiProtocol.ANDROID_PAD,
+                        false
                     )
                     BotConfigEntry(
                         1145142,
                         "a",
-                        BotConfiguration.MiraiProtocol.ANDROID_PAD
+                        BotConfiguration.MiraiProtocol.ANDROID_PAD,
+                        false
                     )
                 })
                 val bytes: ByteArray = currentConfigArray.toString().toByteArray()

@@ -29,7 +29,7 @@ class RPIC3Command : CommandEntry {
     private val lastWocUrls: Queue<String> = ConcurrentLinkedQueue()
 
     override fun getName(): String {
-        return "woc"
+        return "rpic3"
     }
 
     override suspend fun process(commandArg: PackagedCommandInfo, firedEvent: MessageEvent) {

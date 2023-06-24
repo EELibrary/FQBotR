@@ -8,8 +8,13 @@ import net.mamoe.mirai.utils.BotConfiguration
 class BotConfigEntry(
     private val qid: Long,
     private val password: String,
-    private val protocol: BotConfiguration.MiraiProtocol
+    private val protocol: BotConfiguration.MiraiProtocol,
+    private val enableBotLog: Boolean
 ) {
+    fun getEnableBotLog(): Boolean{
+        return this.enableBotLog
+    }
+
     fun getProtocol(): BotConfiguration.MiraiProtocol {
         return this.protocol
     }

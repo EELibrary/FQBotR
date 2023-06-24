@@ -1,8 +1,12 @@
 package co.earthme.fqbot.bot
 
+import com.kasukusakura.mlss.resolver.SakuraLoginSolver
+import com.kasukusakura.mlss.slovbroadcast.SakuraTransmitDaemon
 import net.mamoe.mirai.Bot
 import net.mamoe.mirai.BotFactory
 import net.mamoe.mirai.event.Event
+import net.mamoe.mirai.event.events.BotJoinGroupEvent
+import net.mamoe.mirai.event.events.MemberJoinEvent
 import net.mamoe.mirai.utils.BotConfiguration
 import org.apache.logging.log4j.LogManager
 import org.apache.logging.log4j.Logger
@@ -24,8 +28,11 @@ abstract class BotEntry {
                 fileBasedDeviceInfo(File(DATA_FOLDER, "deviceInfo-" + configEntry.getQid() + ".json").path)
             }
         }
+
         configuration.protocol = configEntry.getProtocol()
-        configuration.noBotLog()
+        if (!configEntry.getEnableBotLog()){
+            configuration.noBotLog()
+        }
         configuration.noNetworkLog()
         doInitCacheFolder(configuration, configEntry)
         this.bot = BotFactory.INSTANCE.newBot(configEntry.getQid(), configEntry.getPassword(), configuration)

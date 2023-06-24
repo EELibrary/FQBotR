@@ -14,7 +14,7 @@ import kotlin.streams.toList
 
 class RPICCommand : CommandEntry {
     override fun getName(): String {
-        return "superWoc"
+        return "rpic"
     }
 
     override suspend fun process(commandArg: PackagedCommandInfo, firedEvent: MessageEvent) {
@@ -48,11 +48,13 @@ class RPICCommand : CommandEntry {
 
         val proxy = ConfigManager.getReadConfig().getReadProxy()
         for (link in gotLinks!!.toList()){
-            var downloaded: ByteArray? = null
-            proxy?.let {
-                downloaded = PixivRandomPictureResponse.downloadFromLink(link, it)
+            val downloaded: ByteArray = if (proxy != null){
+                PixivRandomPictureResponse.downloadFromLink(link, proxy)
+            }else{
+                PixivRandomPictureResponse.downloadFromLink(link)
             }
-            downloaded?.let {
+
+            downloaded.let {
                 val picStream = ByteArrayInputStream(downloaded)
                 try {
                     val image = picStream.uploadAsImage(target,null)
