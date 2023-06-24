@@ -26,7 +26,6 @@ suspend fun main() {
     //Add shutdown hook
     Runtime.getRuntime().addShutdownHook(Thread {
         JSCommandLoader.clearAll()
-        CommandParser.getProcessWorker().shutdownNow()
     })
     //Register commands
     CommandList.regCommand(RPIC3Command())

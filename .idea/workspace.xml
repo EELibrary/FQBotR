@@ -4,17 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1995dc05-20d7-49c9-9a01-be66379999f6" name="变更" comment="Clean codes and add some commands">
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="1995dc05-20d7-49c9-9a01-be66379999f6" name="变更" comment="Fixed UP!">
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/eventsystem/EventHub.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/eventsystem/Listener.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/bot/BotConfigEntry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/bot/BotConfigEntry.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/Main.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/Main.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/bot/BotEntry.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/bot/BotEntry.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/bot/impl/BotImpl.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/bot/impl/BotImpl.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/command/CommandParser.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/command/CommandParser.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/command/commandentry/RPIC3Command.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/command/commandentry/RPIC3Command.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/command/commandentry/RPICCommand.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/command/commandentry/RPICCommand.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/manager/BotManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/manager/BotManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/utils/PixivRandomPictureResponse.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/co/earthme/fqbot/utils/PixivRandomPictureResponse.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,8 +57,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Kotlin Interface" />
         <option value="Class" />
+        <option value="Kotlin Interface" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -205,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674180459390</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Fixed UP!">
+      <created>1687588081637</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1687588081637</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -214,6 +219,7 @@
     <MESSAGE value="Some fixes and change miraicore to 2.9.0" />
     <MESSAGE value="Some fixes and updates" />
     <MESSAGE value="Clean codes and add some commands" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clean codes and add some commands" />
+    <MESSAGE value="Fixed UP!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed UP!" />
   </component>
 </project>
