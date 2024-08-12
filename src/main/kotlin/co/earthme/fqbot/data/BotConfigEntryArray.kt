@@ -3,6 +3,7 @@ package co.earthme.fqbot.data
 import co.earthme.fqbot.bot.BotConfigEntry
 import com.google.gson.Gson
 
+@Deprecated("Unsupported currently")
 class BotConfigEntryArray(
     private val entries: Array<BotConfigEntry>
 ) {

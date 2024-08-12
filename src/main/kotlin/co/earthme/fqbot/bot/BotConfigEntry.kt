@@ -2,29 +2,23 @@ package co.earthme.fqbot.bot
 
 
 import com.google.gson.Gson
-import net.mamoe.mirai.utils.BotConfiguration
 
 
 class BotConfigEntry(
-    private val qid: Long,
-    private val password: String,
-    private val protocol: BotConfiguration.MiraiProtocol,
+    private val token: String,
+    private val websocketUrl: String,
     private val enableBotLog: Boolean
 ) {
+    fun getWebsocketUrl(): String {
+        return this.websocketUrl
+    }
+
     fun getEnableBotLog(): Boolean{
         return this.enableBotLog
     }
 
-    fun getProtocol(): BotConfiguration.MiraiProtocol {
-        return this.protocol
-    }
-
-    fun getQid(): Long {
-        return this.qid
-    }
-
-    fun getPassword(): String {
-        return this.password
+    fun getToken(): String {
+        return this.token
     }
 
     override fun toString(): String {

@@ -1,8 +1,7 @@
 package co.earthme.fqbot.command.commandentry
 
-import co.earthme.fqbot.bot.impl.BotImpl
-import co.earthme.fqbot.command.CommandParser
 import co.earthme.fqbot.command.PackagedCommandInfo
+import co.earthme.fqbot.eventsystem.EventHub
 import co.earthme.fqbot.manager.ConfigManager
 import co.earthme.fqbot.manager.DataManager
 import co.earthme.fqbot.utils.Utils
@@ -12,9 +11,6 @@ import kotlinx.coroutines.withContext
 import net.mamoe.mirai.contact.Contact
 import net.mamoe.mirai.contact.User
 import net.mamoe.mirai.contact.nameCardOrNick
-import net.mamoe.mirai.event.events.FriendMessageEvent
-import net.mamoe.mirai.event.events.GroupMessageEvent
-import net.mamoe.mirai.event.events.GroupTempMessageEvent
 import net.mamoe.mirai.event.events.MessageEvent
 import net.mamoe.mirai.message.data.ForwardMessage
 import net.mamoe.mirai.message.data.Image
@@ -56,11 +52,7 @@ class RPIC3Command : CommandEntry {
         val message = ForwardMessage(preview, "Yee", "Yee", "Yee", "Yee", nodes)
 
         //Send it
-        if (firedEvent is GroupMessageEvent) {
-            firedEvent.group.sendMessage(message)
-        } else if (firedEvent is FriendMessageEvent || firedEvent is GroupTempMessageEvent) {
-            firedEvent.sender.sendMessage(message)
-        }
+        getSenderForFeedback(firedEvent).sendMessage(message)
     }
 
 
@@ -77,7 +69,7 @@ class RPIC3Command : CommandEntry {
                     break
                 }
                 taskCounter.getAndIncrement()
-                BotImpl.getEventHub().getDispatcher().execute {
+                EventHub.getDispatcher().execute {
                     try {
                         val bytes: ByteArray? = if (ConfigManager.getReadConfig().enableProxy()) {
                             val proxy = ConfigManager.getReadConfig().getReadProxy()

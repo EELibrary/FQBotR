@@ -9,15 +9,11 @@ import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 class PackagedJSCommand(
     private val script : Invocable
 ) : CommandEntry{
-    fun getScript(): Invocable{
-        return this.script
-    }
-
     override fun getName(): String {
         return this.script.invokeFunction("getName", arrayOfNulls<JvmType.Object>(0)) as String
     }
 
     override suspend fun process(commandArg: PackagedCommandInfo, firedEvent: MessageEvent) {
-        script.invokeFunction("process", arrayOf(commandArg,firedEvent))
+        script.invokeFunction("process", arrayOf(commandArg, firedEvent))
     }
 }

@@ -5,7 +5,6 @@ import co.earthme.fqbot.manager.ConfigManager
 import co.earthme.fqbot.utils.PixivRandomPictureResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import net.mamoe.mirai.event.events.GroupMessageEvent
 import net.mamoe.mirai.event.events.MessageEvent
 import net.mamoe.mirai.utils.ExternalResource.Companion.uploadAsImage
 import java.io.ByteArrayInputStream
@@ -18,11 +17,7 @@ class RPICCommand : CommandEntry {
     }
 
     override suspend fun process(commandArg: PackagedCommandInfo, firedEvent: MessageEvent) {
-        val target = if (firedEvent is GroupMessageEvent){
-            firedEvent.group
-        }else{
-            firedEvent.sender
-        }
+        val target = getSenderForFeedback(firedEvent)
 
         val args = commandArg.getArgs()
         var gotLinks : Stream<String>? = null

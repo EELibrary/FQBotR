@@ -1,13 +1,9 @@
 package co.earthme.fqbot.bot
 
 import net.mamoe.mirai.Bot
-import net.mamoe.mirai.BotFactory
 import net.mamoe.mirai.event.Event
-import net.mamoe.mirai.utils.BotConfiguration
-import org.apache.logging.log4j.LogManager
-import org.apache.logging.log4j.Logger
 import org.jetbrains.annotations.NotNull
-import java.io.File
+import top.mrxiaom.overflow.BotBuilder
 import java.util.concurrent.atomic.AtomicBoolean
 
 abstract class BotEntry {
@@ -19,23 +15,24 @@ abstract class BotEntry {
 
     suspend fun runBot(@NotNull configEntry: BotConfigEntry) {
         this.configEntry = configEntry
-        val configuration: BotConfiguration = object : BotConfiguration() {
-            init {
-                fileBasedDeviceInfo(File(DATA_FOLDER, "deviceInfo-" + configEntry.getQid() + ".json").path)
+
+        this.bot = configEntry.getToken().let {
+            if (it == "none"){
+                return@let BotBuilder.positive(configEntry.getWebsocketUrl()).connect()
             }
+
+            return@let BotBuilder.positive(configEntry.getWebsocketUrl()).token(configEntry.getToken()).connect()
         }
 
-        configuration.protocol = configEntry.getProtocol()
         if (!configEntry.getEnableBotLog()){
-            configuration.noBotLog()
+            this.bot!!.configuration.noBotLog()
+            this.bot!!.configuration.noNetworkLog()
         }
-        configuration.noNetworkLog()
-        doInitCacheFolder(configuration, configEntry)
-        this.bot = BotFactory.INSTANCE.newBot(configEntry.getQid(), configEntry.getPassword(), configuration)
-        this.bot!!.login()
+
         this.bot!!.eventChannel.subscribeAlways<Event> { event ->
             processEvent(event)
         }
+
         this.connected.set(true)
     }
 
@@ -43,35 +40,11 @@ abstract class BotEntry {
         return this.configEntry
     }
 
-    private fun doInitCacheFolder(configuration: BotConfiguration, entry: BotConfigEntry) {
-        val folder = File(DATA_FOLDER, "caches-" + entry.getQid())
-        if (!folder.exists()) {
-            folder.mkdir()
-        }
-        configuration.cacheDir = folder
-    }
-
-    abstract fun processEvent(event: Event?)
+    abstract fun processEvent(event: Event)
 
     fun isConnected(): Boolean {
         return this.connected.get()
     }
 
-    val currentQid: Long? get() = this.configEntry?.getQid()
-
-    companion object {
-        private val LOGGER: Logger = LogManager.getLogger()
-        private val DATA_FOLDER = File("deviceInfoFolder")
-
-        init {
-            try {
-                val infoFile = File("deviceInfoFolder")
-                if (!infoFile.exists()) {
-                    infoFile.mkdir()
-                }
-            } catch (e: Exception) {
-                LOGGER.error(e)
-            }
-        }
-    }
+    val currentQid: Long? get() = this.bot?.id
 }

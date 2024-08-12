@@ -48,7 +48,7 @@ class PackagedCommandInfo(chain: MessageChain) {
 
     override fun toString(): String {
         return String.format(
-            "@PackagedCommandInfo[head=%s,str_arg=%s,other_args=%s]",
+            "@PackagedCommandInfo[head=%s, str_arg=%s, other_args=%s]",
             this.commandHead, this.args, this.otherArgs
         )
     }

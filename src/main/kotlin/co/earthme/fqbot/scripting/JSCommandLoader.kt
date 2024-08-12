@@ -20,7 +20,7 @@ class JSCommandLoader {
         private var currentScriptDir: File? = null
 
         private fun registerToCommandList(){
-            for (command in loadedCommands){
+            for (command in this.loadedCommands){
                 CommandList.regCommand(command)
             }
         }
@@ -30,9 +30,9 @@ class JSCommandLoader {
                 val engine = ScriptEngineManager().getEngineByName("javascript")
                 engine.eval(String(dataArray, StandardCharsets.UTF_8))
                 val inv = engine as Invocable
-                loadedCommands.add(PackagedJSCommand(inv))
+                this.loadedCommands.add(PackagedJSCommand(inv))
             } catch (e: Exception) {
-                logger.error("Error in loading script!", e)
+                this.logger.error("Error in loading script!", e)
                 e.printStackTrace()
             }
         }
@@ -46,11 +46,12 @@ class JSCommandLoader {
                         CompletableFuture.runAsync {
                             try {
                                 if (singleFile.name.endsWith(".js")) {
+                                    logger.info("Loading script {}", singleFile.name)
                                     val read = Files.readAllBytes(singleFile.toPath())
                                     loadSingleJavaScript(read)
                                 }
                             } catch (e: Exception) {
-                                logger.error("Error in reading file!", e)
+                                this.logger.error("Error in reading file!", e)
                                 e.printStackTrace()
                             }
                         }
@@ -58,8 +59,8 @@ class JSCommandLoader {
                         length -> arrayOfNulls<CompletableFuture<Any>>(length)
                     }).join()
                 registerToCommandList()
-                logger.info("Load {} javascripts!" , loadedCommands.size)
-                currentScriptDir = scriptsDir
+                this.logger.info("Load {} javascripts!" , this.loadedCommands.size)
+                this.currentScriptDir = scriptsDir
             }
         }
 
@@ -70,13 +71,13 @@ class JSCommandLoader {
                     CommandList.removeCommand(singleCommand)
                 }
             }
-            loadedCommands.clear()
+            this.loadedCommands.clear()
         }
 
         @Synchronized
         fun reload() {
             clearAll()
-            loadAll(currentScriptDir)
+            loadAll(this.currentScriptDir)
         }
     }
 }

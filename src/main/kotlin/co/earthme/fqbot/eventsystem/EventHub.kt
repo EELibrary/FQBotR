@@ -9,7 +9,8 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
-class EventHub {
+object EventHub {
+    private val logger : Logger = LogManager.getLogger()
     private val dispatcher : ExecutorService = Executors.newCachedThreadPool()
     private val listeners : MutableSet<Listener> = ConcurrentHashMap.newKeySet()
 
@@ -75,9 +76,5 @@ class EventHub {
     fun shutdownDispatcher(){
         this.dispatcher.shutdown()
         this.dispatcher.awaitTermination(3,TimeUnit.SECONDS)
-    }
-
-    companion object{
-        private val logger : Logger = LogManager.getLogger()
     }
 }

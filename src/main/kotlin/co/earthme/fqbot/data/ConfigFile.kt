@@ -6,9 +6,7 @@ import java.net.InetSocketAddress
 import java.net.Proxy
 
 class ConfigFile(
-    private val listenGroup: Long,
     private val masterQid: Long,
-    private val paraLoadBots: Boolean,
     private val enableProxy: Boolean,
     private val proxyIp: String,
     private val proxyPort: Int
@@ -38,13 +36,6 @@ class ConfigFile(
         return this.proxyPort
     }
 
-    fun getListeningGroup(): Long {
-        return this.listenGroup
-    }
-
-    fun paraLoad(): Boolean {
-        return this.paraLoadBots
-    }
 
     fun getMasterQid(): Long {
         return this.masterQid

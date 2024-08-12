@@ -3,38 +3,23 @@ package co.earthme.fqbot.utils
 import net.mamoe.mirai.contact.Group
 import net.mamoe.mirai.contact.Member
 import org.apache.logging.log4j.LogManager
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import java.io.IOException
 import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.Proxy
 import java.net.URL
-import java.util.*
+import java.util.concurrent.ThreadLocalRandom
 
 object Utils {
-    private val RANDOM = Random()
-
-    @Throws(IOException::class)
-    fun readInputStream(inputStream: InputStream): ByteArrayInputStream {
-        val buffer = ByteArray('Ѐ'.code)
-        var len: Int
-        val bos = ByteArrayOutputStream()
-        while (inputStream.read(buffer).also { len = it } != -1) {
-            bos.write(buffer, 0, len)
-        }
-        bos.close()
-        return ByteArrayInputStream(bos.toByteArray())
-    }
-
-    @Throws(IOException::class)
     fun readInputStreamToByte(inputStream: InputStream): ByteArray {
         val buffer = ByteArray('Ѐ'.code)
         var len: Int
         val bos = ByteArrayOutputStream()
+
         while (inputStream.read(buffer).also { len = it } != -1) {
             bos.write(buffer, 0, len)
         }
+
         bos.close()
         return bos.toByteArray()
     }
@@ -45,10 +30,10 @@ object Utils {
                 return member
             }
         }
+
         return null
     }
 
-    @Throws(IOException::class)
     fun getBytes(url: String, proxy: Proxy): ByteArray? {
         LogManager.getLogger().info("Downloading:{}", url)
         val url1 = URL(url)
@@ -57,6 +42,7 @@ object Utils {
         connection.readTimeout = 30000
         connection.connectTimeout = 3000
         connection.connect()
+
         try {
             if (connection.responseCode == 200) {
                 return readInputStreamToByte(connection.inputStream)
@@ -70,10 +56,10 @@ object Utils {
         } finally {
             connection.disconnect()
         }
+
         return null
     }
 
-    @Throws(IOException::class)
     fun getBytes(url1: String?): ByteArray? {
         LogManager.getLogger().info("Downloading:{}", url1)
         val url = URL(url1)
@@ -100,10 +86,8 @@ object Utils {
 
     private val randomUserAgent: String
         get() {
-            synchronized(this) {
-                val rLength = RANDOM.nextInt(agents.size - 1)
-                return agents[rLength]
-            }
+            val rLength = ThreadLocalRandom.current().nextInt(agents.size - 1)
+            return agents[rLength]
         }
 
     //User-Agents
